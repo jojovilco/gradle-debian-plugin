@@ -6,4 +6,8 @@ class DataMapper {
 
   @Input
   String fileMode
+  @Input
+  String userName
+  @Input
+  String groupName
 }

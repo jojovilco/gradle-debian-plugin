@@ -6,4 +6,8 @@ class DataDirectoryMapper {
 
   @Input
   Closure filename
+  @Input
+  String userName
+  @Input
+  String groupName
 }

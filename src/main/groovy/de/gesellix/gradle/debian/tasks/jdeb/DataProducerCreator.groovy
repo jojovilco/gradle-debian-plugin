@@ -14,12 +14,14 @@ class DataProducerCreator {
     def result = [] as DataProducer[]
     data.directories.each { directory ->
       assert project.file(directory.name).exists()
-      def mapper = new ClosureFilenameMapper(directory?.mapper?.filename);
+      def mapper = new ClosureFilenameMapper(
+          directory?.mapper?.userName, directory?.mapper?.groupName,
+          directory?.mapper?.filename);
       result = result.toList() + new DataProducerDirectory(project.file(directory.name), directory.inclusions, directory.exclusions, mapper)
     }
     data.files.each { file ->
       assert project.file(file.name).exists()
-      def mapper = new PermMapper(-1, -1, null, null, file.mapper.fileMode, null, -1, null)
+      def mapper = new PermMapper(-1, -1, file.mapper.userName, file.mapper.groupName, file.mapper.fileMode, null, -1, null)
       result = result.toList() + new DataProducerFile(project.file(file.name), file.target, null, null, mapper)
     }
     data.links.each { link ->
